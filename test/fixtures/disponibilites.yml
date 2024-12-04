@@ -1,0 +1,11 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  date_debut: 2024-12-04 15:59:24
+  date_fin: 2024-12-04 15:59:24
+  piece: one
+
+two:
+  date_debut: 2024-12-04 15:59:24
+  date_fin: 2024-12-04 15:59:24
+  piece: two
