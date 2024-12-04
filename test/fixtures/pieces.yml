@@ -1,0 +1,13 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  description: MyText
+  capacite: 1
+  residence: one
+  type_de_piece: MyString
+
+two:
+  description: MyText
+  capacite: 1
+  residence: two
+  type_de_piece: MyString
