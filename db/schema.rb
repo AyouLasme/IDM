@@ -10,7 +10,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2024_12_04_105110) do
+ActiveRecord::Schema[8.0].define(version: 2024_12_04_140801) do
+  create_table "materiels", force: :cascade do |t|
+    t.string "nom"
+    t.text "description"
+    t.integer "quantites_disponible"
+    t.integer "residence_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["residence_id"], name: "index_materiels_on_residence_id"
+  end
+
   create_table "pieces", force: :cascade do |t|
     t.text "description"
     t.integer "capacite"
@@ -19,6 +29,15 @@ ActiveRecord::Schema[8.0].define(version: 2024_12_04_105110) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["residence_id"], name: "index_pieces_on_residence_id"
+  end
+
+  create_table "prestations", force: :cascade do |t|
+    t.string "libelle"
+    t.text "description"
+    t.integer "residence_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["residence_id"], name: "index_prestations_on_residence_id"
   end
 
   create_table "reservations", force: :cascade do |t|
@@ -34,6 +53,33 @@ ActiveRecord::Schema[8.0].define(version: 2024_12_04_105110) do
     t.index ["user_id"], name: "index_reservations_on_user_id"
   end
 
+  create_table "residences", force: :cascade do |t|
+    t.string "nom_de_la_residence"
+    t.text "adresse"
+    t.text "description"
+    t.string "image"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "saisons", force: :cascade do |t|
+    t.string "libelle"
+    t.date "debut_saison"
+    t.date "fin_saison"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "tarifs", force: :cascade do |t|
+    t.decimal "prix"
+    t.integer "saison_id", null: false
+    t.integer "piece_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["piece_id"], name: "index_tarifs_on_piece_id"
+    t.index ["saison_id"], name: "index_tarifs_on_saison_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "nom"
     t.string "prenom"
@@ -45,7 +91,11 @@ ActiveRecord::Schema[8.0].define(version: 2024_12_04_105110) do
     t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "materiels", "residences"
   add_foreign_key "pieces", "residences"
+  add_foreign_key "prestations", "residences"
   add_foreign_key "reservations", "pieces"
   add_foreign_key "reservations", "users"
+  add_foreign_key "tarifs", "pieces"
+  add_foreign_key "tarifs", "saisons"
 end

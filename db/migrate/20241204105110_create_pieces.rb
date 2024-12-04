@@ -5,6 +5,7 @@ class CreatePieces < ActiveRecord::Migration[8.0]
       t.integer :capacite
       t.references :residence, null: false, foreign_key: true
       t.string :type_de_piece
+      t.string :image
 
       t.timestamps
     end

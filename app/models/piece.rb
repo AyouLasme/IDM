@@ -1,6 +1,7 @@
 class Piece < ApplicationRecord
   belongs_to :residence
   has_many :reservations
+  has_many :tarifs, dependent: :destroy
 
    # Ajouter des validations ici
    validates :description, :capacite, :type_de_piece, presence: true
