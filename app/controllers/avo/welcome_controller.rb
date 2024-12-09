@@ -1,7 +1,7 @@
 module Avo
     class WelcomeController < Avo::ApplicationController
       def index
-        # Vous pouvez ajouter une logique ici si nécessaire
+        # Logique de la page d'accueil, si nécessaire
       end
     end
   end

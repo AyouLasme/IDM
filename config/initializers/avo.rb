@@ -3,8 +3,7 @@
 Avo.configure do |config|
   ## == Routing ==
   config.root_path = '/avo'
-
-  #config.dashboards = [Avo::Dashboards::AdminDashboard]
+  config.home_path = '/avo/welcome'
   #require Rails.root.join('app', 'avo', 'dashboards', 'admin_dashboard')
 
   # used only when you have custom `map` configuration in your config.ru
