@@ -3,6 +3,10 @@
 Avo.configure do |config|
   ## == Routing ==
   config.root_path = '/avo'
+
+  #config.dashboards = [Avo::Dashboards::AdminDashboard]
+  #require Rails.root.join('app', 'avo', 'dashboards', 'admin_dashboard')
+
   # used only when you have custom `map` configuration in your config.ru
   # config.prefix_path = "/internal"
 

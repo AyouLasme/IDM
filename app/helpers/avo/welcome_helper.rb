@@ -1,0 +1,2 @@
+module Avo::WelcomeHelper
+end
