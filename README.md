@@ -22,3 +22,14 @@ Things you may want to cover:
 * Deployment instructions
 
 * ...
+
+
+Reste à faire:
+
+* Appliquer un style Css pour la page de connexion (Ayou)
+* Tester la partie admin et gerer les bugs (Désiré)
+* Recuperation des donnees admin et les affichés dans la page de reservation user (Désiré)
+* user:
+    Creer une page qui va lister les differentes residences, pieces et comodité avec formulaire de reservation (Ayou)
+
+Deadline: demain 11/12/2024 soir
