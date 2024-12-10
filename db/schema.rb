@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2024_12_04_150933) do
+ActiveRecord::Schema[8.0].define(version: 2024_12_09_221635) do
   create_table "disponibilites", force: :cascade do |t|
     t.datetime "date_debut"
     t.datetime "date_fin"
@@ -111,7 +111,7 @@ ActiveRecord::Schema[8.0].define(version: 2024_12_04_150933) do
     t.string "nom"
     t.string "prenom"
     t.string "email"
-    t.string "mot_de_passe"
+    t.string "encrypted_password"
     t.string "role"
     t.text "adresse"
     t.datetime "created_at", null: false

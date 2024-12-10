@@ -1,8 +1,7 @@
 module Avo
-    class WelcomeController < Avo::ApplicationController
-      def index
-        # Logique de la page d'accueil, si nécessaire
-      end
+  class WelcomeController < ApplicationController
+    def index
+      render plain: "Welcome from Avo!"
     end
   end
-  
+end
