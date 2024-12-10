@@ -1,7 +1,13 @@
 Rails.application.routes.draw do
+  devise_for :users
+  get "home/index"
   mount Avo::Engine, at: '/avo'
 
+  root to: "home#index"
+
   # Route pour la page de bienvenue dans le namespace :avo
+    # Redirige /avo vers la page d'accueil personnalisée
+  # Route pour la page d'accueil personnalisée
   namespace :avo do
     get 'welcome', to: 'welcome#index'
   end

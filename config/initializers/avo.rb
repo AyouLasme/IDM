@@ -3,8 +3,7 @@
 Avo.configure do |config|
   ## == Routing ==
   config.root_path = '/avo'
-
-  #config.dashboards = [Avo::Dashboards::AdminDashboard]
+  config.home_path = '/avo/welcome'
   #require Rails.root.join('app', 'avo', 'dashboards', 'admin_dashboard')
 
   # used only when you have custom `map` configuration in your config.ru
@@ -26,23 +25,25 @@ Avo.configure do |config|
   end
 
   ## == Authentication ==
-  # config.current_user_method = :current_user
-  # config.authenticate_with do
-  # end
+  config.current_user_method = :current_user
+  config.authenticate_with do
+    redirect_to main_app.new_user_session_path unless current_user
+  end
+  
 
   ## == Authorization ==
   # config.is_admin_method = :is_admin
   # config.is_developer_method = :is_developer
-  # config.authorization_methods = {
-  #   index: 'index?',
-  #   show: 'show?',
-  #   edit: 'edit?',
-  #   new: 'new?',
-  #   update: 'update?',
-  #   create: 'create?',
-  #   destroy: 'destroy?',
-  #   search: 'search?',
-  # }
+  config.authorization_methods = {
+    index: 'index?',
+    show: 'show?',
+    edit: 'edit?',
+    new: 'new?',
+    update: 'update?',
+    create: 'create?',
+    destroy: 'destroy?',
+    search: 'search?',
+  }
   # config.raise_error_on_missing_policy = false
   config.authorization_client = nil
   config.explicit_authorization = true
