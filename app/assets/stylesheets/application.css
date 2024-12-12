@@ -194,5 +194,26 @@ body {
   .devise-links a:hover {
     text-decoration: underline;
   }
-  
-  
+
+
+.residence-card {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 16px;
+  margin-bottom: 16px;
+  background-color: #f9f9f9;
+  text-align: center;
+}
+
+.residence-images {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.residence-image {
+  max-width: 100px;
+  max-height: 100px;
+  border-radius: 8px;
+}

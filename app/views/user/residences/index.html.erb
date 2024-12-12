@@ -2,8 +2,12 @@
 
 <% @residences.each do |residence| %>
   <div class="residence-card">
-    <% if residence.image.attached? %>
-      <%= image_tag residence.image, alt: residence.nom_de_la_residence %>
+    <% if residence.images.attached? %>
+      <div class="residence-images">
+        <% residence.images.each do |image| %>
+          <%= image_tag image, alt: residence.nom_de_la_residence, class: "residence-image" %>
+        <% end %>
+      </div>
     <% else %>
       <p>Aucune image disponible</p>
     <% end %>
