@@ -1,0 +1,18 @@
+<h1><%= @residence.name %></h1>
+
+<% if @residence.image.attached? %>
+  <%= image_tag @residence.image, alt: @residence.name %>
+<% end %>
+<p><%= @residence.description %></p>
+
+<h2>Réserver la résidence entière</h2>
+<%= link_to "Faire une réservation", new_user_residence_reservation_path(@residence), class: "button" %>
+
+<h2>Pièces disponibles</h2>
+<% @pieces.each do |piece| %>
+  <div class="piece-card">
+    <h3><%= piece.name %></h3>
+    <p><%= piece.description %></p>
+    <%= link_to "Réserver cette pièce", new_user_residence_piece_reservation_path(@residence, piece), class: "button" %>
+  </div>
+<% end %>

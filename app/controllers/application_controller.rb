@@ -1,10 +1,10 @@
 class ApplicationController < ActionController::Base
   include Pundit
 
-  # Only allow modern browsers supporting webp images, web push, badges, import maps, CSS nesting, and CSS :has.
+  # Allow only modern browsers supporting required features
   allow_browser versions: :modern
 
-  # Gérer les exceptions de Pundit
+  # Gestion des exceptions de Pundit
   rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
 
   # Autoriser les champs supplémentaires dans Devise
@@ -20,12 +20,18 @@ class ApplicationController < ActionController::Base
 
   # Rediriger après connexion
   def after_sign_in_path_for(resource)
-    resource.admin? ? avo_path : root_path
+    if resource.admin?
+      avo_path # Redirige les administrateurs vers l'interface Avo
+    else
+      user_residences_path # Redirige les utilisateurs vers la liste des résidences
+    end
   end
 
   # Autoriser les champs supplémentaires pour Devise
   def configure_permitted_parameters
-    devise_parameter_sanitizer.permit(:sign_up, keys: [:nom, :prenom, :adresse])
-    devise_parameter_sanitizer.permit(:account_update, keys: [:nom, :prenom, :adresse])
+    # Autoriser les champs supplémentaires pour l'inscription
+    devise_parameter_sanitizer.permit(:sign_up, keys: [:nom, :prenom, :adresse, :role])
+    # Autoriser les champs supplémentaires pour la mise à jour du profil
+    devise_parameter_sanitizer.permit(:account_update, keys: [:nom, :prenom, :adresse, :role])
   end
 end

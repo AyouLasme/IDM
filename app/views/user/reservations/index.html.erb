@@ -1,0 +1,27 @@
+<h1>Mes Réservations</h1>
+
+<table>
+  <thead>
+  <tr>
+    <th>Résidence</th>
+    <th>Pièce</th>
+    <th>Date de début</th>
+    <th>Date de fin</th>
+    <th>Actions</th>
+  </tr>
+  </thead>
+  <tbody>
+  <% @reservations.each do |reservation| %>
+    <tr>
+      <td><%= reservation.residence.name %></td>
+      <td><%= reservation.piece&.name || "Résidence entière" %></td>
+      <td><%= reservation.date_debut %></td>
+      <td><%= reservation.date_fin %></td>
+      <td>
+        <%= link_to "Modifier", edit_user_reservation_path(reservation), class: "button" %>
+        <%= link_to "Supprimer", user_reservation_path(reservation), method: :delete, data: { confirm: "Êtes-vous sûr ?" }, class: "button" %>
+      </td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>

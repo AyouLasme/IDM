@@ -1,0 +1,14 @@
+<h1>Liste des Résidences</h1>
+
+<% @residences.each do |residence| %>
+  <div class="residence-card">
+    <% if residence.image.attached? %>
+      <%= image_tag residence.image, alt: residence.nom_de_la_residence %>
+    <% else %>
+      <p>Aucune image disponible</p>
+    <% end %>
+    <h2><%= link_to residence.nom_de_la_residence, user_residence_path(residence) %></h2>
+    <p><%= residence.adresse %></p>
+    <p><%= residence.description %></p>
+  </div>
+<% end %>
