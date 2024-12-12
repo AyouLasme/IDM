@@ -3,24 +3,36 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
-    has_many :reservations
 
+  has_many :reservations
 
   # Définir les rôles disponibles
   ROLES = %w[admin manager user].freeze
 
-  # Vérifications de rôle
+  # Validations
+  validates :nom, presence: true
+  validates :prenom, presence: true
+  validates :adresse, presence: true
+  validates :role, inclusion: { in: ROLES, message: "%{value} n'est pas un rôle valide" }
+
+  # Définir un rôle par défaut avant validation
+  before_validation :set_default_role, on: :create
+
   def admin?
-  role == 'admin'
+    role == 'admin'
   end
 
   def manager?
-  role == 'manager'
+    role == 'manager'
   end
 
   def user?
-  role == 'user'
+    role == 'user'
+  end
+
+  private
+
+  def set_default_role
+    self.role ||= 'user'
   end
 end
-
-  

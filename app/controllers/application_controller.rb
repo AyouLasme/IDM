@@ -7,6 +7,9 @@ class ApplicationController < ActionController::Base
   # Gérer les exceptions de Pundit
   rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
 
+  # Autoriser les champs supplémentaires dans Devise
+  before_action :configure_permitted_parameters, if: :devise_controller?
+
   private
 
   # Gestion des erreurs d'autorisation
@@ -19,5 +22,10 @@ class ApplicationController < ActionController::Base
   def after_sign_in_path_for(resource)
     resource.admin? ? avo_path : root_path
   end
-end
 
+  # Autoriser les champs supplémentaires pour Devise
+  def configure_permitted_parameters
+    devise_parameter_sanitizer.permit(:sign_up, keys: [:nom, :prenom, :adresse])
+    devise_parameter_sanitizer.permit(:account_update, keys: [:nom, :prenom, :adresse])
+  end
+end
