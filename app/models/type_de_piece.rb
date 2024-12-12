@@ -3,4 +3,8 @@ class TypeDePiece < ApplicationRecord
 
   # Validation pour s'assurer que le champ libellé est unique et présent
   validates :libelle, presence: true, uniqueness: true
+
+    def to_s
+      libelle
+    end
 end

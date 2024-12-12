@@ -5,4 +5,7 @@ class Residence < ApplicationRecord
     has_many :materiels, dependent: :destroy
     has_many :prestations, dependent: :destroy
 
+    def to_s
+        nom_de_la_residence
+    end
 end
