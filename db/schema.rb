@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2024_12_13_075248) do
+ActiveRecord::Schema[8.0].define(version: 2024_12_13_121434) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -113,10 +113,10 @@ ActiveRecord::Schema[8.0].define(version: 2024_12_13_075248) do
 
   create_table "saisons", force: :cascade do |t|
     t.string "libelle"
-    t.date "debut_saison"
-    t.date "fin_saison"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "debut_saison"
+    t.integer "fin_saison"
   end
 
   create_table "tarifs", force: :cascade do |t|

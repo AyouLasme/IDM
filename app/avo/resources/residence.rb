@@ -1,9 +1,12 @@
 class Avo::Resources::Residence < Avo::BaseResource
   def fields
     field :id, as: :id
-    field :nom_de_la_residence, as: :text, name: "Nom"
     field :adresse, as: :textarea, name: "Adresse"
     field :description, as: :textarea, name: "Description"
+    field :residence, as: :belongs_to, name: "Résidence",
+          searchable: true,
+          display_as: :select,
+          label: ->(residence) { residence.nom_de_la_residence if residence.present? }
 
     # Champ pour uploader plusieurs images
     field :images, as: :files, name: "Images"

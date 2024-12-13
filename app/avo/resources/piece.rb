@@ -1,21 +1,23 @@
 class Avo::Resources::Piece < Avo::BaseResource
-  self.title = :description # Décrit la pièce comme son titre
+  self.title = :description # Utilise le champ `description` comme titre
 
   def fields
     field :id, as: :id
-    field :description, as: :textarea, name: "Description"
-    field :capacite, as: :number, name: "Capacité"
+    field :description, as: :textarea, name: "Description", placeholder: "Entrez une description pour la pièce"
+    field :capacite, as: :number, name: "Capacité", placeholder: "Entrez la capacité maximale"
 
     # Relation vers Résidence
     field :residence, as: :belongs_to, name: "Résidence",
           searchable: true,
           display_as: :select,
+          placeholder: "Sélectionnez une résidence",
           label: ->(residence) { residence.nom_de_la_residence if residence.present? }
 
     # Relation vers Type de Pièce
     field :type_de_piece, as: :belongs_to, name: "Type de Pièce",
           searchable: true,
           display_as: :select,
+          placeholder: "Sélectionnez un type de pièce",
           label: ->(type) { type.libelle if type.present? }
 
     # Champ pour uploader plusieurs images
