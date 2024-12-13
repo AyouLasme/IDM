@@ -1,4 +1,5 @@
 class Avo::Resources::Materiel < Avo::BaseResource
+  self.title = :nom
   # self.includes = []
   # self.attachments = []
   # self.search = {

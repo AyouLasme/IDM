@@ -1,4 +1,5 @@
 class Avo::Resources::Tarif < Avo::BaseResource
+  self.title = :prix
   # self.includes = []
   # self.attachments = []
   # self.search = {

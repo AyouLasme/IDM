@@ -1,6 +1,8 @@
 class Avo::Resources::Residence < Avo::BaseResource
+  self.title = :nom_de_la_residence
   def fields
     field :id, as: :id
+    field :nom_de_la_residence, as: :text, name: "Nom"
     field :adresse, as: :textarea, name: "Adresse"
     field :description, as: :textarea, name: "Description"
     field :residence, as: :belongs_to, name: "Résidence",

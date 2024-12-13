@@ -1,5 +1,7 @@
 class Disponibilite < ApplicationRecord
+  belongs_to :reservable, polymorphic: true
   belongs_to :piece
+  belongs_to :residence
 
   # Validations
   validates :date_debut, :date_fin, presence: true

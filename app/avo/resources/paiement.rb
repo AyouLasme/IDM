@@ -1,4 +1,5 @@
 class Avo::Resources::Paiement < Avo::BaseResource
+
   def fields
     field :id, as: :id
     field :montant, as: :number

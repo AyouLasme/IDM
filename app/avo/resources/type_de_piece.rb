@@ -1,4 +1,5 @@
 class Avo::Resources::TypeDePiece < Avo::BaseResource
+  self.title = :libelle
   # self.includes = []
   # self.attachments = []
   # self.search = {
