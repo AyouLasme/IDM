@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2024_12_12_165315) do
+ActiveRecord::Schema[8.0].define(version: 2024_12_13_075248) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -76,6 +76,7 @@ ActiveRecord::Schema[8.0].define(version: 2024_12_12_165315) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "type_de_piece_id", null: false
+    t.string "nom"
     t.index ["residence_id"], name: "index_pieces_on_residence_id"
     t.index ["type_de_piece_id"], name: "index_pieces_on_type_de_piece_id"
   end
@@ -90,10 +91,10 @@ ActiveRecord::Schema[8.0].define(version: 2024_12_12_165315) do
   end
 
   create_table "reservations", force: :cascade do |t|
-    t.datetime "date_debut"
-    t.datetime "date_fin"
-    t.string "statut"
-    t.decimal "montant_global"
+    t.datetime "date_debut", null: false
+    t.datetime "date_fin", null: false
+    t.string "statut", default: "Réservé", null: false
+    t.decimal "montant_global", precision: 10, scale: 2
     t.integer "user_id", null: false
     t.integer "piece_id", null: false
     t.datetime "created_at", null: false

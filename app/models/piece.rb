@@ -10,5 +10,9 @@ class Piece < ApplicationRecord
    # Ajouter des validations ici
    validates :description, :capacite, :type_de_piece, presence: true
    validates :capacite, numericality: { greater_than: 0 }
+
+  def to_s
+    nom
+  end
 end
 

@@ -21,7 +21,7 @@
 <% if @pieces.any? %>
   <% @pieces.each do |piece| %>
     <div class="piece-card" style="border: 1px solid #ddd; padding: 16px; margin: 16px 0;">
-      <h3><%= piece.nom_de_la_piece %></h3>
+      <h3><%= piece.nom %></h3>
       <p><%= piece.description %></p>
       <%= link_to "Réserver cette pièce", new_user_residence_piece_reservation_path(@residence, piece), class: "button", style: "background-color: #007bff; color: #fff; padding: 8px 16px; text-decoration: none; border-radius: 4px;" %>
     </div>
