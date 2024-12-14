@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2024_12_13_153032) do
+ActiveRecord::Schema[8.0].define(version: 2024_12_14_104303) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -42,13 +42,11 @@ ActiveRecord::Schema[8.0].define(version: 2024_12_13_153032) do
   create_table "disponibilites", force: :cascade do |t|
     t.datetime "date_debut"
     t.datetime "date_fin"
-    t.integer "piece_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "reservable_type"
+    t.string "reservable_type", null: false
     t.integer "reservable_id"
-    t.index ["piece_id"], name: "index_disponibilites_on_piece_id"
-    t.index ["reservable_id"], name: "index_disponibilites_on_reservable_id"
+    t.index ["reservable_type", "reservable_id"], name: "index_disponibilites_on_reservable"
   end
 
   create_table "materiels", force: :cascade do |t|
@@ -125,11 +123,12 @@ ActiveRecord::Schema[8.0].define(version: 2024_12_13_153032) do
   create_table "tarifs", force: :cascade do |t|
     t.decimal "prix"
     t.integer "saison_id", null: false
-    t.integer "piece_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["piece_id"], name: "index_tarifs_on_piece_id"
+    t.string "tarifable_type"
+    t.integer "tarifable_id"
     t.index ["saison_id"], name: "index_tarifs_on_saison_id"
+    t.index ["tarifable_type", "tarifable_id"], name: "index_tarifs_on_tarifable"
   end
 
   create_table "type_de_pieces", force: :cascade do |t|
@@ -154,16 +153,10 @@ ActiveRecord::Schema[8.0].define(version: 2024_12_13_153032) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
-  add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
-  add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
-  add_foreign_key "disponibilites", "pieces"
-  add_foreign_key "materiels", "residences"
-  add_foreign_key "paiements", "reservations"
   add_foreign_key "pieces", "residences"
   add_foreign_key "pieces", "type_de_pieces"
   add_foreign_key "prestations", "residences"
   add_foreign_key "reservations", "pieces"
   add_foreign_key "reservations", "users"
-  add_foreign_key "tarifs", "pieces"
   add_foreign_key "tarifs", "saisons"
 end

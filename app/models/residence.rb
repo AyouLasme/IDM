@@ -4,9 +4,10 @@ class Residence < ApplicationRecord
     has_many :pieces, dependent: :destroy
     has_many :materiels, dependent: :destroy
     has_many :prestations, dependent: :destroy
-    has_many :disponibilites, as: :reservable, dependent: :destroy
+    has_many :disponibilites, as: :reservable
 
     def to_s
-        nom_de_la_residence
+        nom_de_la_residence || "Residence ##{id}"
     end
 end
+

@@ -1,0 +1,11 @@
+=> 
+[32m#<Piece:0x00000162e965dae0[0m
+ id: [34m[1m2[0m,
+ description: [31m[1m"[0m[31msalle de bain avec vue sur mer[0m[31m[1m"[0m,
+ capacite: [34m[1m2[0m,
+ residence_id: [34m[1m1[0m,
+ type_de_piece: [36m[1mnil[0m,
+ created_at: [31m[1m"[0m[31m2024-12-12 23:05:01.305319000 +0000[0m[31m[1m"[0m,
+ updated_at: [31m[1m"[0m[31m2024-12-12 23:05:01.674403000 +0000[0m[31m[1m"[0m,
+ type_de_piece_id: [34m[1m2[0m,
+ nom: [36m[1mnil[0m[32m>[0m
