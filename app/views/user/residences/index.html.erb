@@ -1,18 +1,44 @@
-<h1>Liste des Résidences</h1>
+<h1 class="page-title">Liste des Résidences</h1>
 
-<% @residences.each do |residence| %>
-  <div class="residence-card">
-    <% if residence.images.attached? %>
+<!--<div class="date-filter">-->
+  <%#= form_with url: user_residences_path, method: :get, local: true do |f| %>
+<!--    <div class="date-field">-->
+<!--      <label for="start_date">Date de début</label>-->
+      <%#= f.date_field :start_date, value: params[:start_date], class: "date-input" %>
+<!--    </div>-->
+<!--    <div class="date-field">-->
+<!--      <label for="end_date">Date de fin</label>-->
+      <%#= f.date_field :end_date, value: params[:end_date], class: "date-input" %>
+<!--    </div>-->
+<!--    <div class="form-actions">-->
+      <%#= f.submit "Filtrer", class: "filter-button" %>
+<!--    </div>-->
+  <%# end %>
+<!--</div>-->
+
+
+
+<div class="residences-container">
+  <% @residences.each do |residence| %>
+    <div class="residence-card">
       <div class="residence-images">
-        <% residence.images.each do |image| %>
-          <%= image_tag image, alt: residence.nom_de_la_residence, class: "residence-image" %>
+        <% if residence.images.attached? %>
+          <% residence.images.each do |image| %>
+            <%= image_tag image, alt: residence.nom_de_la_residence, class: "residence-image" %>
+          <% end %>
+        <% else %>
+          <div class="no-image">
+            <p>Aucune image disponible</p>
+          </div>
         <% end %>
       </div>
-    <% else %>
-      <p>Aucune image disponible</p>
-    <% end %>
-    <h2><%= link_to residence.nom_de_la_residence, user_residence_path(residence) %></h2>
-    <p><%= residence.adresse %></p>
-    <p><%= residence.description %></p>
-  </div>
-<% end %>
+      <div class="residence-content">
+        <h2 class="residence-title">
+          <%= link_to residence.nom_de_la_residence, user_residence_path(residence), class: "residence-link" %>
+        </h2>
+        <p class="residence-address"><%= residence.adresse %></p>
+        <p class="residence-description"><%= residence.description %></p>
+      </div>
+    </div>
+  <% end %>
+</div>

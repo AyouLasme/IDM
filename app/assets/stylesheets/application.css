@@ -9,26 +9,26 @@
  * Consider organizing styles into separate files for maintainability.
  */
 
- .flash-messages {
-    margin: 20px;
-    padding: 10px;
-  }
-  
-  .notice {
-    background-color: #d4edda;
-    color: #155724;
-    border: 1px solid #c3e6cb;
-    padding: 10px;
-    border-radius: 5px;
-  }
-  
-  .alert {
-    background-color: #f8d7da;
-    color: #721c24;
-    border: 1px solid #f5c6cb;
-    padding: 10px;
-    border-radius: 5px;
-  } 
+.flash-messages {
+  margin: 20px;
+  padding: 10px;
+}
+
+.notice {
+  background-color: #d4edda;
+  color: #155724;
+  border: 1px solid #c3e6cb;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+.alert {
+  background-color: #f8d7da;
+  color: #721c24;
+  border: 1px solid #f5c6cb;
+  padding: 10px;
+  border-radius: 5px;
+}
 
 
 
@@ -36,184 +36,277 @@
 
 /* Général */
 body {
-    font-family: Arial, sans-serif;
-    background: linear-gradient(to bottom right, #4facfe, #00f2fe);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    margin: 0;
-  }
-  
-  .auth-container {
-    background: white;
-    border-radius: 10px;
-    padding: 30px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    width: 350px;
-    text-align: center;
-  }
-  
-  .auth-container h2 {
-    color: #333;
-    margin-bottom: 20px;
-    font-size: 24px;
-    font-weight: bold;
-  }
-  
-  /* Formulaire */
-  .field {
-    margin-bottom: 20px;
-    text-align: left;
-  }
-  
-  .field label {
-    font-weight: bold;
-    color: #555;
-    margin-bottom: 5px;
-    display: block;
-  }
-  
-  .field input[type="email"],
-  .field input[type="password"],
-  .field input[type="text"] {
-    width: 100%;
-    padding: 10px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    margin-top: 5px;
-  }
-  
-  .actions input[type="submit"] {
-    background-color: #4facfe;
-    border: none;
-    color: white;
-    padding: 12px;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 16px;
-    font-weight: bold;
-    width: 100%;
-  }
-  
-  .actions input[type="submit"]:hover {
-    background-color: #00c2fe;
-  }
-  
-  /* Liens */
-  .devise-links {
-    margin-top: 15px;
-    font-size: 14px;
-  }
-  
-  .devise-links a {
-    color: #00c2fe;
-    text-decoration: none;
-    font-weight: bold;
-  }
-  
-  .devise-links a:hover {
-    text-decoration: underline;
-  }
+  font-family: Arial, sans-serif;
+}
 
-
-
-
-
-  /* Conteneur principal */
 .auth-container {
-    background: white;
-    border-radius: 10px;
-    padding: 30px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    width: 350px;
-    text-align: center;
-    margin: auto;
-  }
-  
-  /* Titre du formulaire */
-  .auth-title {
-    color: #333;
-    margin-bottom: 20px;
-    font-size: 24px;
-    font-weight: bold;
-  }
-  
-  /* Champs de formulaire */
-  .field {
-    margin-bottom: 20px;
-    text-align: left;
-  }
-  
-  .field label {
-    font-weight: bold;
-    color: #555;
-    margin-bottom: 5px;
-    display: block;
-  }
-  
-  .field input[type="email"],
-  .field input[type="password"],
-  .field input[type="text"] {
-    width: 100%;
-    padding: 10px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    margin-top: 5px;
-  }
-  
-  /* Bouton de soumission */
-  .actions input[type="submit"] {
-    background-color: #4facfe;
-    border: none;
-    color: white;
-    padding: 12px;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 16px;
-    font-weight: bold;
-    width: 100%;
-  }
-  
-  .actions input[type="submit"]:hover {
-    background-color: #00c2fe;
-  }
-  
-  /* Liens Devise */
-  .devise-links {
-    margin-top: 15px;
-    font-size: 14px;
-  }
-  
-  .devise-links a {
-    color: #00c2fe;
-    text-decoration: none;
-    font-weight: bold;
-  }
-  
-  .devise-links a:hover {
-    text-decoration: underline;
-  }
-
-
-.residence-card {
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  padding: 16px;
-  margin-bottom: 16px;
-  background-color: #f9f9f9;
+  background: white;
+  border-radius: 10px;
+  padding: 30px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  width: 350px;
   text-align: center;
 }
 
-.residence-images {
+.auth-container h2 {
+  color: #333;
+  margin-bottom: 20px;
+  font-size: 24px;
+  font-weight: bold;
+}
+
+/* Formulaire */
+.field {
+  margin-bottom: 20px;
+  text-align: left;
+}
+
+.field label {
+  font-weight: bold;
+  color: #555;
+  margin-bottom: 5px;
+  display: block;
+}
+
+.field input[type="email"],
+.field input[type="password"],
+.field input[type="text"] {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  margin-top: 5px;
+}
+
+.actions input[type="submit"] {
+  background-color: #4facfe;
+  border: none;
+  color: white;
+  padding: 12px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: bold;
+  width: 100%;
+}
+
+.actions input[type="submit"]:hover {
+  background-color: #00c2fe;
+}
+
+/* Liens */
+.devise-links {
+  margin-top: 15px;
+  font-size: 14px;
+}
+
+.devise-links a {
+  color: #00c2fe;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.devise-links a:hover {
+  text-decoration: underline;
+}
+
+
+
+/* Container global */
+.page-title {
+  text-align: center;
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 2rem;
+  color: #333;
+}
+
+.residences-container {
   display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
   justify-content: center;
-  gap: 8px;
-  margin-bottom: 8px;
+  padding: 1rem;
+}
+
+/* Carte d'une résidence */
+.residence-card {
+  background-color: #c7ecee;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  width: 300px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.residence-card:hover {
+  transform: scale(1.03);
+  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* Images */
+.residence-images {
+  position: relative;
+  width: 100%;
+  height: 200px;
+  overflow: hidden;
 }
 
 .residence-image {
-  max-width: 100px;
-  max-height: 100px;
-  border-radius: 8px;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.no-image {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #f9f9f9;
+  height: 200px;
+  font-size: 1rem;
+  color: #888;
+}
+
+/* Contenu de la résidence */
+.residence-content {
+  padding: 1rem;
+}
+
+.residence-title {
+  font-size: 1.25rem;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+  color: #007BFF;
+}
+
+.residence-link {
+  text-decoration: none;
+  color: inherit;
+}
+
+.residence-link:hover {
+  text-decoration: underline;
+  color: #0056b3;
+}
+
+.residence-address {
+  font-size: 0.9rem;
+  color: #555;
+  margin-bottom: 0.5rem;
+}
+
+.residence-description {
+  font-size: 0.85rem;
+  color: #666;
+}
+
+/* Responsiveness */
+@media (max-width: 768px) {
+  .residences-container {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .residence-card {
+    width: 100%;
+  }
+}
+
+/*  CSS pour le filtre de date*/
+/* Conteneur principal */
+.date-filter {
+  display: flex;
+  justify-content: center; /* Centre le filtre horizontalement */
+  align-items: center;
+  margin-bottom: 2rem;
+  padding: 1.5rem;
+  background-color: #f7f7f7; /* Fond clair */
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Ombre légère */
+  max-width: 900px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Ligne des champs */
+.date-row {
+  display: flex;
+  align-items: flex-end; /* Aligne les champs et le bouton sur la même ligne */
+  gap: 1.5rem; /* Espacement entre les colonnes */
+  width: 100%;
+}
+
+/* Champ individuel */
+.date-field {
+  display: flex;
+  flex-direction: column; /* Label au-dessus de l'input */
+  flex: 1; /* Chaque champ prend une largeur égale */
+}
+
+.date-field label {
+  font-size: 1rem;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+  color: #333;
+}
+
+.date-input {
+  padding: 0.5rem;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  width: 100%;
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1); /* Ombre interne subtile */
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.date-input:focus {
+  outline: none;
+  border-color: #007bff; /* Bordure bleue au focus */
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
+/* Bouton Filtrer */
+.form-actions {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.filter-button {
+  padding: 0.7rem 1.5rem;
+  font-size: 1rem;
+  font-weight: bold;
+  color: #fff;
+  background-color: #007bff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.filter-button:hover {
+  background-color: #0056b3;
+  transform: scale(1.05); /* Effet léger d'agrandissement au survol */
+}
+
+.filter-button:focus {
+  outline: none;
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
+/* Responsivité */
+@media (max-width: 768px) {
+  .date-row {
+    flex-direction: column; /* Les champs passent en vertical sur mobile */
+    gap: 1rem;
+  }
+
+  .filter-button {
+    width: 100%; /* Le bouton prend toute la largeur sur mobile */
+  }
 }
