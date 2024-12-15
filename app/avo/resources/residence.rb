@@ -4,8 +4,13 @@ class Avo::Resources::Residence < Avo::BaseResource
   def fields
     field :id, as: :id
     field :nom_de_la_residence, as: :text, name: "Nom"
-    field :adresse, as: :textarea, name: "Adresse"
-    field :description, as: :textarea, name: "Description"
+    field :adresse, as: :text, name: "Adresse", show_on: [:index, :show]
+    field :description, as: :text, name: "Description", show_on: [:index, :show]
+
+    # Nombre de pièces (champ calculé)
+    field :nombre_de_pieces, as: :number, name: "Nombre de pièces", readonly: true do |residence|
+      residence&.pieces&.count || 0
+    end
 
     # Champ pour uploader plusieurs images
     field :images, as: :files, name: "Images"
