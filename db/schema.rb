@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2024_12_15_101958) do
+ActiveRecord::Schema[8.0].define(version: 2024_12_15_104224) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -101,6 +101,7 @@ ActiveRecord::Schema[8.0].define(version: 2024_12_15_101958) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "residence_id"
+    t.decimal "montant_par_jour"
     t.index ["piece_id"], name: "index_reservations_on_piece_id"
     t.index ["residence_id"], name: "index_reservations_on_residence_id"
     t.index ["user_id"], name: "index_reservations_on_user_id"
