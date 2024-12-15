@@ -1,4 +1,5 @@
 class SaisonsMateriel < ApplicationRecord
+  self.table_name = "saisons_materiels"
   belongs_to :saison
   belongs_to :materiel
 

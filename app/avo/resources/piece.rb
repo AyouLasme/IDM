@@ -4,9 +4,10 @@ class Avo::Resources::Piece < Avo::BaseResource
 
   def fields
     field :id, as: :id
-    field :description, as: :textarea, name: "Description", placeholder: "Entrez une description pour la pièce"
+    field :description, as: :text, name: "Description", placeholder: "Entrez une description pour la pièce", show_on: [:index, :show]
     field :capacite, as: :number, name: "Capacité", placeholder: "Entrez la capacité maximale"
     field :disponibilites, as: :has_many, name: "Disponibilités"
+
     # Relation vers Résidence
     field :residence, as: :belongs_to, name: "Résidence",
           searchable: true,

@@ -12,6 +12,7 @@ class Avo::Resources::Prestation < Avo::BaseResource
     field :libelle, as: :text
     field :description, as: :textarea
     field :residence, as: :belongs_to
+    field :prix, as: :number, name: "Prix", readonly: true
 
     # Relations avec Saisons
     field :saisons_prestations, as: :has_many

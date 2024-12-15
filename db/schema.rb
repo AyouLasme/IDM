@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2024_12_15_104224) do
+ActiveRecord::Schema[8.0].define(version: 2024_12_15_135900) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -102,7 +102,11 @@ ActiveRecord::Schema[8.0].define(version: 2024_12_15_104224) do
     t.datetime "updated_at", null: false
     t.integer "residence_id"
     t.decimal "montant_par_jour"
+    t.integer "materiel_id"
+    t.integer "prestation_id"
+    t.index ["materiel_id"], name: "index_reservations_on_materiel_id"
     t.index ["piece_id"], name: "index_reservations_on_piece_id"
+    t.index ["prestation_id"], name: "index_reservations_on_prestation_id"
     t.index ["residence_id"], name: "index_reservations_on_residence_id"
     t.index ["user_id"], name: "index_reservations_on_user_id"
   end
@@ -202,7 +206,9 @@ ActiveRecord::Schema[8.0].define(version: 2024_12_15_104224) do
   add_foreign_key "pieces", "residences"
   add_foreign_key "pieces", "type_de_pieces"
   add_foreign_key "prestations", "residences"
+  add_foreign_key "reservations", "materiels"
   add_foreign_key "reservations", "pieces"
+  add_foreign_key "reservations", "prestations"
   add_foreign_key "reservations", "residences"
   add_foreign_key "reservations", "users"
   add_foreign_key "residences_saisons", "residences"

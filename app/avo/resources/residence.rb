@@ -1,11 +1,13 @@
 class Avo::Resources::Residence < Avo::BaseResource
   self.title = :nom_de_la_residence
   self.includes = [:saisons, :residences_saisons]
+
   def fields
     field :id, as: :id
     field :nom_de_la_residence, as: :text, name: "Nom"
     field :adresse, as: :text, name: "Adresse", show_on: [:index, :show]
     field :description, as: :text, name: "Description", show_on: [:index, :show]
+    field :disponibilites, as: :has_many, name: "Disponibilités"
 
     # Nombre de pièces (champ calculé)
     field :nombre_de_pieces, as: :number, name: "Nombre de pièces", readonly: true do |residence|

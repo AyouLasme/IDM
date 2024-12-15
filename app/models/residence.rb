@@ -7,7 +7,7 @@ class Residence < ApplicationRecord
     has_many :prestations, dependent: :destroy
     has_many :disponibilites, as: :reservable
     has_and_belongs_to_many :saisons
-    has_many :residences_saisons
+    has_many :residences_saisons, dependent: :destroy
     has_many :saisons, through: :residences_saisons
 
     def to_s
