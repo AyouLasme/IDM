@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2024_12_14_104303) do
+ActiveRecord::Schema[8.0].define(version: 2024_12_15_010656) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -112,12 +112,55 @@ ActiveRecord::Schema[8.0].define(version: 2024_12_14_104303) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "residences_saisons", force: :cascade do |t|
+    t.integer "residence_id", null: false
+    t.integer "saison_id", null: false
+    t.decimal "prix", precision: 10, scale: 2, default: "0.0", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["residence_id", "saison_id"], name: "index_residences_saisons_on_residence_id_and_saison_id", unique: true
+    t.index ["residence_id"], name: "index_residences_saisons_on_residence_id"
+    t.index ["saison_id"], name: "index_residences_saisons_on_saison_id"
+  end
+
   create_table "saisons", force: :cascade do |t|
     t.string "libelle"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "debut_saison"
     t.integer "fin_saison"
+  end
+
+  create_table "saisons_materiels", force: :cascade do |t|
+    t.integer "saison_id", null: false
+    t.integer "materiel_id", null: false
+    t.decimal "prix", precision: 10, scale: 2, default: "0.0", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["materiel_id"], name: "index_saisons_materiels_on_materiel_id"
+    t.index ["saison_id", "materiel_id"], name: "index_saisons_materiels_on_saison_id_and_materiel_id", unique: true
+    t.index ["saison_id"], name: "index_saisons_materiels_on_saison_id"
+  end
+
+  create_table "saisons_pieces", force: :cascade do |t|
+    t.integer "saison_id", null: false
+    t.integer "piece_id", null: false
+    t.decimal "prix"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["piece_id"], name: "index_saisons_pieces_on_piece_id"
+    t.index ["saison_id"], name: "index_saisons_pieces_on_saison_id"
+  end
+
+  create_table "saisons_prestations", force: :cascade do |t|
+    t.integer "saison_id", null: false
+    t.integer "prestation_id", null: false
+    t.decimal "prix", precision: 10, scale: 2, default: "0.0", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["prestation_id"], name: "index_saisons_prestations_on_prestation_id"
+    t.index ["saison_id", "prestation_id"], name: "index_saisons_prestations_on_saison_id_and_prestation_id", unique: true
+    t.index ["saison_id"], name: "index_saisons_prestations_on_saison_id"
   end
 
   create_table "tarifs", force: :cascade do |t|
@@ -158,5 +201,13 @@ ActiveRecord::Schema[8.0].define(version: 2024_12_14_104303) do
   add_foreign_key "prestations", "residences"
   add_foreign_key "reservations", "pieces"
   add_foreign_key "reservations", "users"
+  add_foreign_key "residences_saisons", "residences"
+  add_foreign_key "residences_saisons", "saisons"
+  add_foreign_key "saisons_materiels", "materiels"
+  add_foreign_key "saisons_materiels", "saisons"
+  add_foreign_key "saisons_pieces", "pieces"
+  add_foreign_key "saisons_pieces", "saisons"
+  add_foreign_key "saisons_prestations", "prestations"
+  add_foreign_key "saisons_prestations", "saisons"
   add_foreign_key "tarifs", "saisons"
 end

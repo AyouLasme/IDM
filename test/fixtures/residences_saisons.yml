@@ -1,0 +1,11 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  residence: one
+  saison: one
+  prix: 9.99
+
+two:
+  residence: two
+  saison: two
+  prix: 9.99

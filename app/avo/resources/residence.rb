@@ -1,17 +1,18 @@
 class Avo::Resources::Residence < Avo::BaseResource
   self.title = :nom_de_la_residence
+  self.includes = [:saisons, :residences_saisons]
   def fields
     field :id, as: :id
     field :nom_de_la_residence, as: :text, name: "Nom"
     field :adresse, as: :textarea, name: "Adresse"
     field :description, as: :textarea, name: "Description"
-    field :residence, as: :belongs_to, name: "Résidence",
-          searchable: true,
-          display_as: :select,
-          label: ->(residence) { residence.nom_de_la_residence if residence.present? }
 
     # Champ pour uploader plusieurs images
     field :images, as: :files, name: "Images"
+
+    # Relation Many-to-Many avec les saisons
+    field :residences_saisons, as: :has_many
+    field :saisons, as: :has_many
 
     # Aperçu des images (pour la vue des détails uniquement)
     field :images_preview, as: :text, name: "Aperçu des Images", only_on: :show do |residence|

@@ -1,5 +1,6 @@
 class Avo::Resources::Piece < Avo::BaseResource
   self.title = :description # Utilise le champ `description` comme titre
+  self.includes = [:saisons_pieces, :saisons]
 
   def fields
     field :id, as: :id
@@ -19,6 +20,10 @@ class Avo::Resources::Piece < Avo::BaseResource
           display_as: :select,
           placeholder: "Sélectionnez un type de pièce",
           label: ->(type) { type.libelle if type.present? }
+
+    # Relation avec Saisons
+    field :saisons_pieces, as: :has_many
+    field :saisons, as: :has_many
 
     # Champ pour uploader plusieurs images
     field :images, as: :files, name: "Images"

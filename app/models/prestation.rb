@@ -1,5 +1,7 @@
 class Prestation < ApplicationRecord
   belongs_to :residence
+  has_many :saisons_prestations
+  has_many :saisons, through: :saisons_prestations
 
     # Validations
     validates :libelle, :description, presence: true

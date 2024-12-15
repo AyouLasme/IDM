@@ -1,4 +1,15 @@
 class Saison < ApplicationRecord
+
+  has_and_belongs_to_many :residences
+  has_many :residences_saisons
+  has_many :residences, through: :residences_saisons
+  has_many :saisons_pieces
+  has_many :pieces, through: :saisons_pieces
+  has_many :saisons_materiels
+  has_many :materiels, through: :saisons_materiels
+  has_many :saisons_prestations
+  has_many :prestations, through: :saisons_prestations
+
   # Validations
   validates :libelle, presence: true, uniqueness: true
   validates :debut_saison, :fin_saison, presence: true
