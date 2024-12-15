@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2024_12_15_010656) do
+ActiveRecord::Schema[8.0].define(version: 2024_12_15_101958) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -97,10 +97,12 @@ ActiveRecord::Schema[8.0].define(version: 2024_12_15_010656) do
     t.string "statut", default: "Réservé", null: false
     t.decimal "montant_global", precision: 10, scale: 2
     t.integer "user_id", null: false
-    t.integer "piece_id", null: false
+    t.integer "piece_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "residence_id"
     t.index ["piece_id"], name: "index_reservations_on_piece_id"
+    t.index ["residence_id"], name: "index_reservations_on_residence_id"
     t.index ["user_id"], name: "index_reservations_on_user_id"
   end
 
@@ -200,6 +202,7 @@ ActiveRecord::Schema[8.0].define(version: 2024_12_15_010656) do
   add_foreign_key "pieces", "type_de_pieces"
   add_foreign_key "prestations", "residences"
   add_foreign_key "reservations", "pieces"
+  add_foreign_key "reservations", "residences"
   add_foreign_key "reservations", "users"
   add_foreign_key "residences_saisons", "residences"
   add_foreign_key "residences_saisons", "saisons"
