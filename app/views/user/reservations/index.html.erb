@@ -18,11 +18,85 @@
         <td><%= reservation.date_debut %></td>
         <td><%= reservation.date_fin %></td>
         <td>
-          <%= link_to "Modifier", edit_user_reservation_path(reservation), class: "button" %>
-          <%= link_to "Supprimer", user_reservation_path(reservation), method: :delete, data: { confirm: "Êtes-vous sûr ?" }, class: "button delete" %>
+          <!-- Bouton Modifier -->
+          <button class="button edit-btn" data-reservation-id="<%= reservation.id %>"
+                  data-date-debut="<%= reservation.date_debut %>"
+                  data-date-fin="<%= reservation.date_fin %>">
+            Modifier
+          </button>
+          <!-- Bouton Supprimer -->
+          <%= link_to "Supprimer", user_reservation_path(reservation), method: :delete,
+                      data: { confirm: "Êtes-vous sûr ?" }, class: "button delete" %>
         </td>
       </tr>
     <% end %>
     </tbody>
   </table>
 </div>
+
+<!-- Modal de mise à jour -->
+<div id="editModal" class="modal" style="display: none;">
+  <div class="modal-content">
+    <span class="close-modal" id="closeEditModal">&times;</span>
+    <h2>Modifier la réservation</h2>
+    <%= form_with url: "#", method: :patch, local: true, id: "updateReservationForm" do |f| %>
+      <!-- CSRF Token caché -->
+      <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+
+      <div class="field">
+        <label for="date_debut">Date de début</label>
+        <input type="date" id="date_debut" name="reservation[date_debut]" required>
+      </div>
+      <div class="field">
+        <label for="date_fin">Date de fin</label>
+        <input type="date" id="date_fin" name="reservation[date_fin]" required>
+      </div>
+      <div class="actions">
+        <button type="submit" class="button modify">Mettre à jour</button>
+      </div>
+    <% end %>
+  </div>
+</div>
+
+
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const modal = document.getElementById("editModal");
+        const closeModal = document.getElementById("closeEditModal");
+        const editButtons = document.querySelectorAll(".edit-btn");
+        const form = document.getElementById("updateReservationForm");
+
+        // Fonction pour ouvrir et pré-remplir le modal
+        editButtons.forEach(button => {
+            button.addEventListener("click", function () {
+                const reservationId = button.getAttribute("data-reservation-id");
+                const dateDebut = button.getAttribute("data-date-debut");
+                const dateFin = button.getAttribute("data-date-fin");
+
+                // Pré-remplir les champs du formulaire
+                document.getElementById("date_debut").value = dateDebut;
+                document.getElementById("date_fin").value = dateFin;
+
+                // Mettre à jour l'action du formulaire avec l'URL correcte
+                form.action = `/user/reservations/${reservationId}`;
+
+                // Afficher le modal
+                modal.style.display = "block";
+            });
+        });
+
+        // Fermer le modal
+        closeModal.addEventListener("click", function () {
+            modal.style.display = "none";
+        });
+
+        // Fermer en cliquant en dehors du modal
+        window.addEventListener("click", function (event) {
+            if (event.target === modal) {
+                modal.style.display = "none";
+            }
+        });
+    });
+
+</script>

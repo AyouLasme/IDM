@@ -34,7 +34,13 @@ class User::ReservationsController < ApplicationController
   # Modifier une réservation existante
   def edit
     @reservation = current_user.reservations.find(params[:id])
+
+    respond_to do |format|
+      format.html { redirect_to user_reservations_path } # Par défaut
+      format.js   # Répondre en JS
+    end
   end
+
 
   # Mettre à jour une réservation existante
   def update

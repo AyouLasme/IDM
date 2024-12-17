@@ -27,7 +27,7 @@ Rails.application.routes.draw do
     end
 
     # Gestion des réservations spécifiques à l'utilisateur connecté
-    resources :reservations, only: [:index, :edit, :update, :destroy]
+    resources :reservations, only: [:index, :new, :create, :edit, :update, :destroy]
 
     # Redirection des utilisateurs connectés vers la liste des résidences
     root to: "residences#index"
