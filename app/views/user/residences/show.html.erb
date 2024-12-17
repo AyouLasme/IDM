@@ -95,6 +95,17 @@
     <span class="close-modal" id="closeModalButton">&times;</span>
     <h2>Réserver la résidence entière</h2>
 
+    <!-- Affichage des messages d'erreur -->
+    <% if @reservation&.errors.any? %>
+      <div class="alert alert-danger">
+        <ul>
+          <% @reservation.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+
     <!-- Formulaire pour la réservation -->
     <%= form_with model: @reservation, url: user_residence_reservations_path(@residence), local: true do |f| %>
       <div>
@@ -107,15 +118,11 @@
         <%= f.date_field :date_fin, required: true %>
       </div>
 
-      <!-- Champ caché pour la résidence -->
-      <%= f.hidden_field :residence_id, value: @residence.id %>
-
-      <div>
-        <%= f.submit "Confirmer la réservation", class: "button" %>
-      </div>
+      <%= f.submit "Confirmer la réservation", class: "button" %>
     <% end %>
   </div>
 </div>
+
 
 
 
