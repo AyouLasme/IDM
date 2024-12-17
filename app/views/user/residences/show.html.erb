@@ -1,31 +1,159 @@
-<h1><%= @residence.nom_de_la_residence %></h1>
+<div class="residence-container">
+  <h1 class="residence-title"><%= @residence.nom_de_la_residence %></h1>
 
-<% if @residence.images.attached? %>
-  <div class="residence-images">
-    <% @residence.images.each do |image| %>
-      <a href="<%= rails_blob_path(image, only_path: true) %>" target="_blank">
-        <img src="<%= rails_blob_path(image, only_path: true) %>" style="max-width: 300px; max-height: 300px; margin: 10px;" alt="<%= @residence.nom_de_la_residence %>">
-      </a>
+  <% if @residence.images.attached? %>
+    <div class="residence-images">
+      <% @residence.images.each do |image| %>
+        <a href="<%= rails_blob_path(image, only_path: true) %>" target="_blank">
+          <img src="<%= rails_blob_path(image, only_path: true) %>" alt="<%= @residence.nom_de_la_residence %>">
+        </a>
+      <% end %>
+    </div>
+  <% else %>
+    <p class="no-pieces">Pas d'images disponibles</p>
+  <% end %>
+
+  <p class="residence-description"><%= @residence.description %></p>
+
+  <!-- Tarifs par saison pour la résidence -->
+  <h2>Tarifs de la résidence par saison</h2>
+  <% if @tarifs_residence.any? %>
+    <table>
+      <thead>
+      <tr>
+        <th>Saison</th>
+        <th>Prix (€)</th>
+      </tr>
+      </thead>
+      <tbody>
+      <% @tarifs_residence.each do |tarif| %>
+        <tr>
+          <td><%= tarif.saison.libelle %></td>
+          <td><%= number_to_currency(tarif.prix, unit: "€") %></td>
+        </tr>
+      <% end %>
+      </tbody>
+    </table>
+  <% else %>
+    <p class="no-pieces">Aucun tarif disponible pour cette résidence.</p>
+  <% end %>
+
+  <!-- Bouton pour réserver la résidence entière -->
+  <!-- <div class="reservation-button">
+    <%= link_to "Réserver la résidence entière", new_user_residence_reservation_path(@residence), class: "button" %>
+  </div>-->
+
+  <!-- Bouton pour ouvrir le modal -->
+  <button type="button" class="button" id="openModalButton">Réserver la résidence entière</button>
+
+  <!-- Liste des pièces disponibles -->
+  <h2>Pièces disponibles</h2>
+  <% if @pieces.any? %>
+    <% @pieces.each do |piece| %>
+      <div class="piece-card">
+        <h3><%= piece.description %></h3>
+
+        <!-- Tarifs par saison pour chaque pièce -->
+        <h4>Tarifs par saison</h4>
+        <% if @tarifs_pieces[piece.id].any? %>
+          <table>
+            <thead>
+            <tr>
+              <th>Saison</th>
+              <th>Prix (€)</th>
+            </tr>
+            </thead>
+            <tbody>
+            <% @tarifs_pieces[piece.id].each do |tarif| %>
+              <tr>
+                <td><%= tarif.saison.libelle %></td>
+                <td><%= number_to_currency(tarif.prix, unit: "€") %></td>
+              </tr>
+            <% end %>
+            </tbody>
+          </table>
+        <% else %>
+          <p>Aucun tarif disponible pour cette pièce.</p>
+        <% end %>
+
+        <%= link_to "Réserver cette pièce", new_user_residence_piece_reservation_path(@residence, piece), class: "button" %>
+      </div>
+    <% end %>
+  <% else %>
+    <p class="no-pieces">Aucune pièce disponible pour cette résidence.</p>
+  <% end %>
+</div>
+
+
+
+
+
+
+<!-- Modal -->
+<div id="reservationModal" class="modal" style="display: none;">
+  <div class="modal-content">
+    <span class="close-modal" id="closeModalButton">&times;</span>
+    <h2>Réserver la résidence entière</h2>
+
+    <!-- Formulaire pour la réservation -->
+    <%= form_with model: @reservation, url: user_residence_reservations_path(@residence), local: true do |f| %>
+      <div>
+        <%= f.label :date_debut, "Date de début" %>
+        <%= f.date_field :date_debut, required: true %>
+      </div>
+
+      <div>
+        <%= f.label :date_fin, "Date de fin" %>
+        <%= f.date_field :date_fin, required: true %>
+      </div>
+
+      <!-- Champ caché pour la résidence -->
+      <%= f.hidden_field :residence_id, value: @residence.id %>
+
+      <div>
+        <%= f.submit "Confirmer la réservation", class: "button" %>
+      </div>
     <% end %>
   </div>
-<% else %>
-  <p>Pas d'images disponibles</p>
-<% end %>
+</div>
 
-<p><%= @residence.description %></p>
 
-<h2>Réserver la résidence entière</h2>
-<%= link_to "Faire une réservation", new_user_residence_reservation_path(@residence), class: "button" %>
 
-<h2>Pièces disponibles</h2>
-<% if @pieces.any? %>
-  <% @pieces.each do |piece| %>
-    <div class="piece-card" style="border: 1px solid #ddd; padding: 16px; margin: 16px 0;">
-      <h3><%= piece.nom %></h3>
-      <p><%= piece.description %></p>
-      <%= link_to "Réserver cette pièce", new_user_residence_piece_reservation_path(@residence, piece), class: "button", style: "background-color: #007bff; color: #fff; padding: 8px 16px; text-decoration: none; border-radius: 4px;" %>
-    </div>
-  <% end %>
-<% else %>
-  <p>Aucune pièce disponible pour cette résidence.</p>
-<% end %>
+
+
+
+
+
+
+
+
+
+
+
+<!-- JavaScript -->
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const openModalButton = document.getElementById("openModalButton");
+        const modal = document.getElementById("reservationModal");
+        const closeModalButton = document.getElementById("closeModalButton");
+
+        // Ouvrir le modal
+        openModalButton.addEventListener("click", function() {
+            modal.style.display = "block";
+        });
+
+        // Fermer le modal en cliquant sur le bouton "fermer"
+        closeModalButton.addEventListener("click", function() {
+            modal.style.display = "none";
+        });
+
+        // Fermer le modal en cliquant en dehors de la boîte
+        window.addEventListener("click", function(event) {
+            if (event.target === modal) {
+                modal.style.display = "none";
+            }
+        });
+    });
+</script>
+
+

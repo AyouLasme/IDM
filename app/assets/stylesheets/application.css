@@ -310,3 +310,206 @@ body {
     width: 100%; /* Le bouton prend toute la largeur sur mobile */
   }
 }
+
+/* page connexion */
+.devise-container {
+  display: grid;
+  place-items: center; /* Centre verticalement et horizontalement */
+  min-height: 100vh;
+  background-color: #f8f9fa;
+}
+
+
+
+
+
+
+
+/* page user view show */
+/* Conteneur principal */
+.residence-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #f9f9f9;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Titre principal */
+.residence-title {
+  text-align: center;
+  color: #333;
+  font-size: 2rem;
+  margin-bottom: 20px;
+}
+
+/* Images des résidences */
+.residence-images {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 15px;
+  margin-bottom: 20px;
+}
+
+.residence-images img {
+  max-width: 300px;
+  max-height: 300px;
+  border-radius: 10px;
+  transition: transform 0.3s ease;
+}
+
+.residence-images img:hover {
+  transform: scale(1.05); /* Zoom léger au survol */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Description */
+.residence-description {
+  text-align: justify;
+  color: #555;
+  font-size: 1rem;
+  line-height: 1.5;
+  margin-bottom: 30px;
+}
+
+/* Bouton principal */
+.button {
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: #28a745;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 5px;
+  font-size: 1rem;
+  transition: background-color 0.3s ease;
+}
+
+.button:hover {
+  background-color: #218838;
+  color: #fff;
+}
+
+/* Cartes des pièces */
+.piece-card {
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  padding: 16px;
+  margin: 16px 0;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  background-color: #fff;
+}
+
+.piece-card h3 {
+  margin-top: 0;
+  color: #007bff;
+  font-size: 1.5rem;
+}
+
+.piece-card p {
+  color: #666;
+  margin-bottom: 10px;
+}
+
+.piece-card .button {
+  background-color: #007bff;
+  color: #fff;
+}
+
+.piece-card .button:hover {
+  background-color: #0056b3;
+}
+
+/* Pas de pièces disponibles */
+.no-pieces {
+  text-align: center;
+  font-style: italic;
+  color: #888;
+  margin-top: 20px;
+}
+
+
+
+/* Style global pour le modal */
+.modal {
+  display: none; /* Caché par défaut */
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.6); /* Fond semi-transparent */
+  z-index: 1000; /* Devant tout le reste */
+  display: flex;
+  justify-content: center; /* Centre horizontalement */
+  align-items: center; /* Centre verticalement */
+}
+
+/* Contenu du modal */
+.modal-content {
+  background-color: #fff;
+  border-radius: 8px;
+  padding: 20px 30px;
+  width: 400px; /* Taille fixe */
+  max-width: 90%; /* Responsive */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  position: relative;
+  animation: fadeIn 0.3s ease-out;
+}
+
+/* Animation d'apparition */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Bouton fermer */
+.close-modal {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 1.2rem;
+  color: #333;
+  cursor: pointer;
+}
+
+/* Champ de formulaire */
+.modal-content label {
+  display: block;
+  margin-bottom: 5px;
+  color: #333;
+}
+
+.modal-content input[type="date"] {
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 1rem;
+}
+
+/* Bouton de confirmation */
+.modal-content .button {
+  display: inline-block;
+  width: 100%;
+  padding: 10px;
+  background-color: #28a745;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  font-size: 1rem;
+  cursor: pointer;
+  text-align: center;
+}
+
+.modal-content .button:hover {
+  background-color: #218838;
+}

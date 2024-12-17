@@ -1,0 +1,20 @@
+<h1>Nouvelle réservation</h1>
+
+<%= form_with model: @reservation, url: user_residence_reservations_path(@residence), local: true do |f| %>
+  <div>
+    <%= f.label :date_debut, "Date de début" %>
+    <%= f.date_field :date_debut, required: true %>
+  </div>
+
+  <div>
+    <%= f.label :date_fin, "Date de fin" %>
+    <%= f.date_field :date_fin, required: true %>
+  </div>
+
+  <!-- Champ caché pour identifier la résidence -->
+  <%= f.hidden_field :residence_id, value: @residence.id %>
+
+  <div>
+    <%= f.submit "Réserver la résidence entière", class: "button" %>
+  </div>
+<% end %>

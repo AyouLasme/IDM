@@ -12,9 +12,20 @@ class User::ResidencesController < ApplicationController
     end
   end
 
-  # Affiche les détails d'une résidence spécifique
   def show
     @residence = Residence.find(params[:id])
-    @pieces = @residence.pieces # Toutes les pièces liées à cette résidence
-  end
+    @pieces = @residence.pieces
+
+    # Récupérer les prix associés aux saisons pour la résidence via la table intermédiaire
+    @tarifs_residence = ResidencesSaison.includes(:saison).where(residence: @residence)
+
+    # Récupérer les tarifs pour chaque pièce via la table intermédiaire
+    @tarifs_pieces = {}
+    @pieces.each do |piece|
+      @tarifs_pieces[piece.id] = SaisonsPiece.includes(:saison).where(piece: piece)
+    end
+
+    # Initialisation de @reservation pour le formulaire
+    @reservation = Reservation.new
+    end
 end
