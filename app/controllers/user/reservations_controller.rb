@@ -56,9 +56,13 @@ class User::ReservationsController < ApplicationController
   # Supprimer une réservation
   def destroy
     @reservation = current_user.reservations.find(params[:id])
-    @reservation.destroy
-    redirect_to user_reservations_path, notice: "Réservation supprimée avec succès."
+    if @reservation.destroy
+      render json: { success: true, message: "Réservation supprimée avec succès." }, status: :ok
+    else
+      render json: { success: false, message: "Erreur lors de la suppression." }, status: :unprocessable_entity
+    end
   end
+
 
   private
 

@@ -664,6 +664,7 @@ body {
 
 .button.delete {
   background-color: #dc3545;
+  padding: 15px;
 }
 
 .button:hover {
@@ -672,4 +673,26 @@ body {
 
 .button.delete:hover {
   background-color: #c82333;
+}
+
+
+.button.delete-btn {
+  background-color: #dc3545; /* Rouge */
+  color: white; /* Texte en blanc */
+  border: none;
+
+  border-radius: 5px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.button.delete-btn:hover {
+  background-color: #c82333; /* Rouge plus foncé au survol */
+}
+
+.actions {
+  display: flex;
+  justify-content: space-around; /* Espacement équilibré */
+  margin-top: 15px;
 }

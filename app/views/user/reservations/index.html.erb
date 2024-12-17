@@ -12,12 +12,12 @@
     </thead>
     <tbody>
     <% @reservations.each do |reservation| %>
-      <tr>
+      <tr id="reservation-<%= reservation.id %>">
         <td><%= reservation.residence.nom_de_la_residence %></td>
         <td><%= reservation.piece&.nom || "Résidence entière" %></td>
         <td><%= reservation.date_debut %></td>
         <td><%= reservation.date_fin %></td>
-        <td>
+        <td class="actions">
           <!-- Bouton Modifier -->
           <button class="button edit-btn" data-reservation-id="<%= reservation.id %>"
                   data-date-debut="<%= reservation.date_debut %>"
@@ -25,8 +25,10 @@
             Modifier
           </button>
           <!-- Bouton Supprimer -->
-          <%= link_to "Supprimer", user_reservation_path(reservation), method: :delete,
-                      data: { confirm: "Êtes-vous sûr ?" }, class: "button delete" %>
+          <button class="button delete-btn" data-reservation-id="<%= reservation.id %>">
+            Supprimer
+          </button>
+
         </td>
       </tr>
     <% end %>
@@ -39,10 +41,8 @@
   <div class="modal-content">
     <span class="close-modal" id="closeEditModal">&times;</span>
     <h2>Modifier la réservation</h2>
-    <%= form_with url: "#", method: :patch, local: true, id: "updateReservationForm" do |f| %>
-      <!-- CSRF Token caché -->
+    <%= form_with url: "#", method: :patch, local: true, id: "updateReservationForm" do %>
       <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
-
       <div class="field">
         <label for="date_debut">Date de début</label>
         <input type="date" id="date_debut" name="reservation[date_debut]" required>
@@ -58,45 +58,90 @@
   </div>
 </div>
 
-
+<!-- Modal de confirmation de suppression -->
+<div id="deleteModal" class="modal" style="display: none;">
+  <div class="modal-content">
+    <span class="close-modal" id="closeDeleteModal">&times;</span>
+    <h2>Confirmation de suppression</h2>
+    <p>Êtes-vous sûr de vouloir supprimer cette réservation ?</p>
+    <div class="actions">
+      <button id="confirmDelete" class="button delete" style="background-color: green">Confirmer</button>
+      <button id="cancelDelete" class="button" style="background-color: red !important;">Annuler</button>
+    </div>
+  </div>
+</div>
 
 <script>
     document.addEventListener("DOMContentLoaded", function () {
-        const modal = document.getElementById("editModal");
-        const closeModal = document.getElementById("closeEditModal");
+        const editModal = document.getElementById("editModal");
+        const deleteModal = document.getElementById("deleteModal");
+        const closeEditModal = document.getElementById("closeEditModal");
+        const closeDeleteModal = document.getElementById("closeDeleteModal");
+        const cancelDelete = document.getElementById("cancelDelete");
+        const confirmDelete = document.getElementById("confirmDelete");
         const editButtons = document.querySelectorAll(".edit-btn");
+        const deleteButtons = document.querySelectorAll(".delete-btn");
         const form = document.getElementById("updateReservationForm");
+        let reservationIdToDelete = null;
 
-        // Fonction pour ouvrir et pré-remplir le modal
+        // --- Modifier Réservation ---
         editButtons.forEach(button => {
             button.addEventListener("click", function () {
                 const reservationId = button.getAttribute("data-reservation-id");
                 const dateDebut = button.getAttribute("data-date-debut");
                 const dateFin = button.getAttribute("data-date-fin");
 
-                // Pré-remplir les champs du formulaire
                 document.getElementById("date_debut").value = dateDebut;
                 document.getElementById("date_fin").value = dateFin;
-
-                // Mettre à jour l'action du formulaire avec l'URL correcte
                 form.action = `/user/reservations/${reservationId}`;
 
-                // Afficher le modal
-                modal.style.display = "block";
+                editModal.style.display = "block";
             });
         });
 
-        // Fermer le modal
-        closeModal.addEventListener("click", function () {
-            modal.style.display = "none";
+        closeEditModal.addEventListener("click", () => editModal.style.display = "none");
+
+        // --- Supprimer Réservation ---
+        deleteButtons.forEach(button => {
+            button.addEventListener("click", function () {
+                reservationIdToDelete = button.getAttribute("data-reservation-id");
+                deleteModal.style.display = "block";
+            });
         });
 
-        // Fermer en cliquant en dehors du modal
-        window.addEventListener("click", function (event) {
-            if (event.target === modal) {
-                modal.style.display = "none";
+        confirmDelete.addEventListener("click", function () {
+            if (reservationIdToDelete) {
+                const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute("content");
+
+                fetch(`/user/reservations/${reservationIdToDelete}`, {
+                    method: "DELETE",
+                    headers: {
+                        "X-CSRF-Token": csrfToken,
+                        "Accept": "application/json"
+                    }
+                })
+                    .then(response => {
+                        if (response.ok) {
+                            document.getElementById(`reservation-${reservationIdToDelete}`).remove();
+                            alert("Réservation supprimée avec succès.");
+                        } else {
+                            alert("Erreur lors de la suppression. Veuillez réessayer.");
+                        }
+                    })
+                    .catch(error => console.error("Erreur:", error))
+                    .finally(() => {
+                        deleteModal.style.display = "none";
+                        reservationIdToDelete = null;
+                    });
             }
         });
-    });
 
+        cancelDelete.addEventListener("click", () => deleteModal.style.display = "none");
+        closeDeleteModal.addEventListener("click", () => deleteModal.style.display = "none");
+
+        window.addEventListener("click", function (event) {
+            if (event.target === editModal) editModal.style.display = "none";
+            if (event.target === deleteModal) deleteModal.style.display = "none";
+        });
+    });
 </script>
